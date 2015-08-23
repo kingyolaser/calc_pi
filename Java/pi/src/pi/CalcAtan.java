@@ -8,25 +8,34 @@ import java.math.RoundingMode;
  */
 public class CalcAtan {
 	
-	static int scale=10;
+	static final int scale=1000;
 	
 	public static BigDecimal atan_1divx(int b){
 		BigDecimal a_big = new BigDecimal(1);
 		BigDecimal b_big = new BigDecimal(b);
 		BigDecimal ret = new BigDecimal(0);
 		
+		//scale‚ÅŒˆ‚ß‚½Œ…”‚Å‚Ù‚Ú‚O‚É‚È‚éæ”‚ð‹‚ß‚éB
+		final int maxp = (int)(scale / Math.log10(b));
+		
 		a_big = a_big.divide(b_big, scale, RoundingMode.HALF_EVEN);
 		ret = ret.add(a_big);
 		
 		//ƒ‹[ƒv
-		a_big = a_big.divide(b_big, scale, RoundingMode.HALF_EVEN);
-		a_big = a_big.divide(b_big, scale, RoundingMode.HALF_EVEN);
-		ret = ret.subtract(a_big.divide(new BigDecimal(3), 10, RoundingMode.HALF_EVEN));
-		
-		a_big = a_big.divide(b_big, scale, RoundingMode.HALF_EVEN);
-		a_big = a_big.divide(b_big, scale, RoundingMode.HALF_EVEN);
-		ret = ret.add(a_big.divide(new BigDecimal(5)));
-		
+		for( int i=3; ; i+=4 ){
+			if( i>maxp ){
+				break;
+			}
+			
+			a_big = a_big.divide(b_big, scale, RoundingMode.HALF_EVEN);
+			a_big = a_big.divide(b_big, scale, RoundingMode.HALF_EVEN);
+			ret = ret.subtract(a_big.divide(new BigDecimal(i), scale, RoundingMode.HALF_EVEN));
+			
+			a_big = a_big.divide(b_big, scale, RoundingMode.HALF_EVEN);
+			a_big = a_big.divide(b_big, scale, RoundingMode.HALF_EVEN);
+			ret = ret.add(a_big.divide(new BigDecimal(i+2), scale, RoundingMode.HALF_EVEN ));
+			
+		}
 		
 		return ret;
 	}
