@@ -6,6 +6,8 @@
 class LongFrac {
 	LongFrac(){}
 	~LongFrac(){}
+
+	void operator+=(const LongFrac& x);
 private:
 	uint64_t  data[LF_MAXINDEX];
 };
