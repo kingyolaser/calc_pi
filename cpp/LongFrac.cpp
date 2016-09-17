@@ -1,4 +1,5 @@
 
+#include <stdio.h>
 #include <string.h>
 #include "LongFrac.h"
 
@@ -19,4 +20,16 @@ void LongFrac::operator+=(const LongFrac& x)
     
     data[0] += x.data[0];
     //繰り上がり処理はしない
+}
+
+void LongFrac::print()
+{
+	printf("%d.\n",(uint32_t)data[0]);
+	
+	for( int i=1; i<LF_MAXINDEX; i++ ){
+		printf("%09x ", (uint32_t)data[i]);
+		if( i%5 == 0 ){
+			printf("\n");
+		}
+	}
 }

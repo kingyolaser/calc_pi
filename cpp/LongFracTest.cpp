@@ -3,8 +3,9 @@
 
 int main()
 {
-	LongFrac a,b;
+	LongFrac a=1,b=2;
 	
 	a += b;
+	a.print();
 }
 
