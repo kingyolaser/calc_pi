@@ -4,10 +4,12 @@
 #define  LF_MAXINDEX 10
 
 class LongFrac {
-	LongFrac(){}
+public:
+	LongFrac(){init();}
 	~LongFrac(){}
 
 	void operator+=(const LongFrac& x);
 private:
+	void init();
 	uint64_t  data[LF_MAXINDEX];
 };
