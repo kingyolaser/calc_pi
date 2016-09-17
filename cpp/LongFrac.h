@@ -14,6 +14,7 @@ public:
 	~LongFrac(){}
 
 	void operator+=(const LongFrac& x);
+	void operator/=(const int x);
 	
 	void print();
 	
