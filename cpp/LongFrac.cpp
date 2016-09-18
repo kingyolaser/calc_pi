@@ -24,9 +24,23 @@ void LongFrac::operator+=(const LongFrac& x)
     //繰り上がり処理はしない
 }
 /****************************************************************************/
+void LongFrac::operator-=(const LongFrac& x)
+{
+    for( int i=LF_MAXINDEX-1; i>0; i-- ){
+        data[i] -= x.data[i];
+        if( data[i] < 0 ){
+            data[i] += LF_UNIT;
+            data[i-1] --;
+        }
+    }
+    
+    data[0] -= x.data[0];
+    //繰り下がり処理はしない
+}
+/****************************************************************************/
 void LongFrac::operator/=(const int x)
 {
-	int amari =0;
+	uint32_t amari =0;
 	for( int i=0; i<LF_MAXINDEX; i++ ){
 		data[i] += amari*LF_UNIT;
 		amari = data[i] % x;
